@@ -78,16 +78,13 @@ public class WindowManager: NSObject, NSWindowDelegate {
     }
     
     public func setAsFrameless() {
-        mainWindow.styleMask.insert(.fullSizeContentView)
         mainWindow.titleVisibility = .hidden
-        mainWindow.isOpaque = true
+        mainWindow.isOpaque = false
         mainWindow.hasShadow = false
-        mainWindow.backgroundColor = NSColor.clear
-        
-        if (mainWindow.styleMask.contains(.titled)) {
-            let titleBarView: NSView = (mainWindow.standardWindowButton(.closeButton)?.superview)!.superview!
-            titleBarView.isHidden = true
-        }
+        mainWindow.backgroundColor = .clear
+        mainWindow.level = .popUpMenu
+        mainWindow.styleMask.remove(.titled)
+        mainWindow.styleMask.insert(.borderless)
     }
     
     public func destroy() {
